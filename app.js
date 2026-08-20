@@ -30,10 +30,10 @@ const obtenerConsejo = async () => {
         // 2.2 Convierte la respuesta a formato JSON. También requiere 'await' ya que es una promesa.
         
         // 2.3 Extrae el consejo. (La API devuelve el texto dentro de data.slip.advice)
-        const consejo = (await respuesta.json()).slip.advice;
+        const data = (await respuesta.json()).slip;
 
         // 2.4 Muestra el consejo en el HTML usando Template Literals (``)
-        TEXTO_DEL_DIA.textContent = consejo;
+        TEXTO_DEL_DIA.textContent = `Consejo N°${data.slip_id}: ${data.advice}`;
         
     } catch (error) {
         // Qué pasa si hay un error (ej. el usuario se queda sin internet)
