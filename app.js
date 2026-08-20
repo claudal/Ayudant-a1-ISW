@@ -4,10 +4,11 @@
 // Utiliza 'const' para declarar las variables, ya que estos elementos no cambiarán.
 // Pista: usa document.getElementById('id-del-elemento')
 
-// TODO: Selecciona el botón usando su id ('fetch-btn') y asígnalo a una variable const
+/**@type {HTMLButtonElement} */
+const BOTON = document.getElementById('fetch-btn');
 
-
-// TODO: Selecciona el párrafo del texto ('quote-text') y asígnalo a una variable const
+/**@type {HTMLParagraphElement} */
+const TEXTO_DEL_DIA = document.getElementById('quote-text');
 
 
 
@@ -19,30 +20,31 @@
 const obtenerConsejo = async () => {
     try {
         // Deshabilitamos el botón mientras carga para evitar múltiples clics
-        // TODO: (opcional pero recomendado) deshabilitar el botón
+        BOTON.disabled = true;
         // Mostramos un texto de carga
-        //TODO: (opcional) puedes cambiar el texto del párrafo a mientras se carga
+        BOTON.textContent = "Cargando frase...";
 
         // 2.1 Utiliza 'fetch' para llamar a la API. Recuerda usar 'await' ya que fetch devuelve una promesa.
-        // TODO: const respuesta = ...
+        const respuesta = await fetch("https://api.adviceslip.com/advice");
         
         // 2.2 Convierte la respuesta a formato JSON. También requiere 'await' ya que es una promesa.
-        // TODO: const data = ...
         
         // 2.3 Extrae el consejo. (La API devuelve el texto dentro de data.slip.advice)
-        // TODO: const consejo = ...
+        const consejo = (await respuesta.json()).slip.advice;
 
         // 2.4 Muestra el consejo en el HTML usando Template Literals (``)
-        // TODO: textoConsejo.textContent = ...
+        TEXTO_DEL_DIA.textContent = consejo;
         
     } catch (error) {
         // Qué pasa si hay un error (ej. el usuario se queda sin internet)
-        // TODO: console.error...
-        // TODO: text.textcontent = ...
+        console.error(error);
+        TEXTO_DEL_DIA.textContent = "Hubo un error al cargar el consejo, vuelve a intentarlo más tarde...";
     } finally {
         // El bloque finally se ejecuta SIEMPRE, haya error o no.
         // Aquí volvemos a habilitar el botón para que puedan pedir otro consejo.
-        // TODO: boton.disabled ...
+        BOTON.disabled = false;
+        // Mostramos un texto de carga
+        BOTON.textContent = "Obtener Conejo";
 
     }
 };
@@ -50,4 +52,4 @@ const obtenerConsejo = async () => {
 // Conectamos el botón con la función
 // Utilizamos addEventListener para escuchar el evento de 'clic' en el botón
 
-// TODO: boton.addEventListener...
+BOTON.addEventListener("click",obtenerConsejo);
