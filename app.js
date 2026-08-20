@@ -33,7 +33,7 @@ const obtenerConsejo = async () => {
         const data = (await respuesta.json()).slip;
 
         // 2.4 Muestra el consejo en el HTML usando Template Literals (``)
-        TEXTO_DEL_DIA.textContent = `Consejo N°${data.slip_id}: ${data.advice}`;
+        TEXTO_DEL_DIA.textContent = `Consejo N°${data.id}: ${data.advice}`;
         
     } catch (error) {
         // Qué pasa si hay un error (ej. el usuario se queda sin internet)
