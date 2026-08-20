@@ -44,7 +44,7 @@ const obtenerConsejo = async () => {
         // Aquí volvemos a habilitar el botón para que puedan pedir otro consejo.
         BOTON.disabled = false;
         // Mostramos un texto de carga
-        BOTON.textContent = "Obtener Conejo";
+        BOTON.textContent = "Obtener Consejo";
 
     }
 };
